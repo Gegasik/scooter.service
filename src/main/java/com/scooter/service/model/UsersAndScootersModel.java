@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "users_and_scooters", schema = "scooterservice", catalog = "")
+@Table(name = "users_and_scooters")
 public class UsersAndScootersModel {
     private int id;
     private int userId;
@@ -13,6 +13,7 @@ public class UsersAndScootersModel {
     private int duration;
     ScooterModel scooter;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

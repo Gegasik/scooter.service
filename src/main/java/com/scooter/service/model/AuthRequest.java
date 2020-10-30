@@ -1,16 +1,21 @@
 package com.scooter.service.model;
 
 public class AuthRequest {
-    private String login;
+    private String email;
     private String password;
 
-    public String getLogin() {
-
-        return login;
+    public AuthRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getEmail() {
+
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

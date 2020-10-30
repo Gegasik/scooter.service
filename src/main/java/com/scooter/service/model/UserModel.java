@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user", schema = "scooterservice")
+@Table(name = "users")
 public class UserModel extends BasicEntity {
     private int id;
     private String login;
@@ -12,6 +12,19 @@ public class UserModel extends BasicEntity {
     private Integer money;
     private int role;
     private String password;
+
+    public UserModel() {
+    }
+
+    public UserModel(int id, String login, String email, Integer money, int role, String password) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.money = money;
+        this.role = role;
+        this.password = password;
+    }
+
     @ManyToMany
     @JoinTable(
             name = "users_and_scooters",
@@ -20,6 +33,7 @@ public class UserModel extends BasicEntity {
     private Set<UserModel> users;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -68,8 +82,6 @@ public class UserModel extends BasicEntity {
     public void setRole(int role) {
         this.role = role;
     }
-
-
 
     @Basic
     @Column(name = "password",nullable = false)

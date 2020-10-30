@@ -26,35 +26,35 @@ public class ScooterService extends AbstractService {
     public List<ScooterModel> getFreeScoots(){
         return repository.getFreeScoots();
     }
-    public List<ScooterModel> getPageFreeScoots(int numberPage){
-        int count=pageableScooterRepository.countAll();
-        while ((count/3)<numberPage){
-            numberPage-=3;
-        }
-        if(count%3==0){
-            Pageable page= PageRequest.of(numberPage,3);
-            return pageableScooterRepository.getFreeScoots(page);
-        }
-
-
-        if (numberPage<(count/3)){
-            Pageable page= PageRequest.of(numberPage,3);
-            return pageableScooterRepository.getFreeScoots(page);
-        }
-        if(count%3==0){
-            while ((count/3)<numberPage){
-                numberPage-=3;
-            }
-            Pageable page= PageRequest.of(numberPage,3);
-            return pageableScooterRepository.getFreeScoots(page);
-        }
-        else {
-            int re=(count/3);
-
-        }
-
-        Pageable page= PageRequest.of(numberPage,3);
-
-        return pageableScooterRepository.getFreeScoots(page);
-    }
+//    public List<ScooterModel> getPageFreeScoots(int numberPage){
+//        int count=pageableScooterRepository.countAll();
+//        while ((count/3)<numberPage){
+//            numberPage-=3;
+//        }
+//        if(count%3==0){
+//            Pageable page= PageRequest.of(numberPage,3);
+//            return pageableScooterRepository.getFreeScoots(page);
+//        }
+//
+//
+//        if (numberPage<(count/3)){
+//            Pageable page= PageRequest.of(numberPage,3);
+//            return pageableScooterRepository.getFreeScoots(page);
+//        }
+//        if(count%3==0){
+//            while ((count/3)<numberPage){
+//                numberPage-=3;
+//            }
+//            Pageable page= PageRequest.of(numberPage,3);
+//            return pageableScooterRepository.getFreeScoots(page);
+//        }
+//        else {
+//            int re=(count/3);
+//
+//        }
+//
+//        Pageable page= PageRequest.of(numberPage,3);
+//
+//        return pageableScooterRepository.getFreeScoots(page);
+//    }
 }

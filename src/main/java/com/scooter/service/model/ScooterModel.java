@@ -4,8 +4,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "scooter", schema = "scooterservice")
+@Table(name = "scooter")
 public class ScooterModel extends BasicEntity {
+    
     private int id;
     private byte isElectric;
     private int costPerHour;
@@ -20,6 +21,7 @@ public class ScooterModel extends BasicEntity {
     private Set<UserModel> users;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -28,6 +30,7 @@ public class ScooterModel extends BasicEntity {
     public void setId(int id) {
         this.id = id;
     }
+
 
     @Basic
     @Column(name = "is_electric", nullable = false)
@@ -38,6 +41,7 @@ public class ScooterModel extends BasicEntity {
     public void setIsElectric(byte isElectric) {
         this.isElectric = isElectric;
     }
+
 
     @Basic
     @Column(name = "cost_per_hour", nullable = false)
@@ -60,7 +64,7 @@ public class ScooterModel extends BasicEntity {
     }
 
     @Basic
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -68,8 +72,9 @@ public class ScooterModel extends BasicEntity {
     public void setLogin(String name) {
         this.login = name;
     }
+
     @Basic
-    @Column(name = "description",nullable = false)
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -77,8 +82,9 @@ public class ScooterModel extends BasicEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
     @Basic
-    @Column(name = "image",nullable = false)
+    @Column(name = "image", nullable = false)
     public String getImage() {
         return image;
     }

@@ -1,6 +1,6 @@
 package com.scooter.service.сontroller;
 
-import com.scooter.service.conf.jwt.JwtProvider;
+
 import com.scooter.service.model.AuthRequest;
 import com.scooter.service.model.AuthResponse;
 import com.scooter.service.model.RegistrationRequest;
@@ -19,9 +19,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
     @Autowired
-    private JwtProvider jwtProvider;
-
-
+    
     @GetMapping("/register")
     public ModelAndView registerPage() {
         return new ModelAndView("register.html");
@@ -41,12 +39,5 @@ public class AuthController {
             return ResponseEntity.ok(user);
         }
         return ResponseEntity.ok(user);
-    }
-
-    @PostMapping("/auth")
-    public AuthResponse auth(@RequestBody AuthRequest request) {
-        UserModel userEntity = userService.findByNameAndPassword(request.getLogin(), request.getPassword());
-        String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponse(token);
     }
 }

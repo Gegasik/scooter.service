@@ -3,12 +3,13 @@ package com.scooter.service.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "scooter_producer", schema = "scooterservice")
+@Table(name = "scooter_producer")
 public class ScooterProducerModel {
     private int id;
     private String name;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

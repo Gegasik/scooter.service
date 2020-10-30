@@ -1,37 +1,41 @@
 package com.scooter.service.сontroller;
 
+import com.scooter.service.OAP.Loggable;
+import com.scooter.service.model.AuthRequest;
 import com.scooter.service.model.UserModel;
 import com.scooter.service.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Optional;
-
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @Loggable
+    @GetMapping("user")
     public ResponseEntity getUsers() {
         return ResponseEntity.ok(userService.getAll());
     }
 
-    @GetMapping(value = "/login/{login}")
-    public ResponseEntity getUserByLogin(@PathVariable(name = "login") String login) {
-        Optional<UserModel> user = userService.findByLogin(login);
-        return user.isPresent() ? ResponseEntity.ok(user.get()) :
-                ResponseEntity.badRequest().body("invalid User login");
-    }
-
-    @PostMapping("/users")
+    @Loggable
+    @PostMapping("user")
     public void saveUser(@RequestBody UserModel userModel) {
         userService.save(userModel);
+    }
+    @Loggable
+    @PostMapping("login")
+    public ResponseEntity<Object> getAuthUser(@RequestBody AuthRequest request) {
+
+        UserModel userEntity = userService.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        if (userEntity == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } else {
+            return ResponseEntity.ok(userEntity);
+        }
     }
 
     @GetMapping("/index")
@@ -40,4 +44,7 @@ public class UserController {
         modelAndView.setViewName("index.html");
         return modelAndView;
     }
+    // Convert a predefined exception to an HTTP Status code
 }
+
+

@@ -17,12 +17,12 @@ public class UserService extends AbstractService {
         super(repository);
     }
 
-    public Optional<UserModel> findByLogin(String name) {
-        return Optional.of(repository.findByLogin(name));
+    public Optional<UserModel> findByEmail(String name) {
+        return Optional.of(repository.findByEmail(name));
     }
 
-    public UserModel findByNameAndPassword(String name, String pass) {
-        return repository.findByLoginAndPassword(name, pass);
+    public UserModel findByEmailAndPassword(String name, String pass) {
+        return repository.findByEmailAndPassword(name, pass);
     }
 
 }
